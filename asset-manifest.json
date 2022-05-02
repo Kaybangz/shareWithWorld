@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/shareWithWorld/static/css/main.6480bf74.css",
+    "main.js": "/shareWithWorld/static/js/main.71017954.js",
+    "index.html": "/shareWithWorld/index.html",
+    "main.6480bf74.css.map": "/shareWithWorld/static/css/main.6480bf74.css.map",
+    "main.71017954.js.map": "/shareWithWorld/static/js/main.71017954.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6480bf74.css",
+    "static/js/main.71017954.js"
+  ]
+}
