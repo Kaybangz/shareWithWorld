@@ -80,6 +80,8 @@ const MainPage = () => {
               verified: user.emailVerified,
               thumbNail: user.photoURL,
               imageURL: url,
+              likes: [],
+              comments: []
             },
             timeStamp: Timestamp.now().toDate(),
           })
