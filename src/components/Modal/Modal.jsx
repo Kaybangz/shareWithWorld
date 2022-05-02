@@ -5,8 +5,10 @@ import Modal from "@mui/material/Modal";
 import { styled } from "@mui/material/styles";
 import { lightBlue } from "@mui/material/colors";
 import CameraIcon from "@mui/icons-material/Camera";
+import Alert from "@mui/material/Alert";
 import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
 import TextField from "@mui/material/TextField";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 const style = {
   position: "absolute",
@@ -29,7 +31,7 @@ const modalBtnStyle = {
 };
 
 const iconStyle = {
-  fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
+  fontSize: "clamp(1.3rem, 2.5vw, 1.3rem)",
 };
 
 const InputTextField = styled(TextField)({
@@ -71,14 +73,19 @@ const UploadButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const ModalButton = ({ caption, setCaption, image, setImage, createPost }) => {
+const ModalButton = ({
+  caption,
+  setCaption,
+  image,
+  setImage,
+  createPost,
+  error,
+  errMsg,
+  fileProgress,
+}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  //   useEffect(() => {
-  //     console.log(caption);
-  //   }, [caption]);
 
   return (
     <div>
@@ -103,6 +110,11 @@ const ModalButton = ({ caption, setCaption, image, setImage, createPost }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          {error && (
+            <Alert className="alert" variant="filled" severity="error">
+              {errMsg}
+            </Alert>
+          )}
           <InputTextField
             sx={{ fontFamily: "Manrope" }}
             fullWidth
@@ -111,24 +123,43 @@ const ModalButton = ({ caption, setCaption, image, setImage, createPost }) => {
             variant="outlined"
             label="Upload Image"
             focused
-            value={image}
+            accept="image/*"
             onChange={(e) => {
               setImage(e.target.files[0]);
             }}
           />
           <InputTextField
             fullWidth
-            label="Enter Image Caption"
+            label="Caption"
             id="fullWidth"
-            sx={{ mt: 3, mb: 3, h: 4, fontFamily: "Manrope" }}
+            sx={{ mt: 3, mb: 2, h: 4, fontFamily: "Manrope" }}
             value={caption}
             onChange={(e) => {
               setCaption(e.target.value);
             }}
           />
-          <UploadButton onClick={createPost} fullWidth>
-            Upload
-          </UploadButton>
+          {fileProgress === 0 ? null : (
+            <ProgressBar
+              completed={fileProgress}
+              className="wrapper"
+              barContainerClassName="progress-container"
+              labelClassName="label"
+              style={{ width: `${fileProgress}` }}
+              bgColor="#18ce6a"
+              animateOnRender
+              customLabel="uploading..."
+            />
+          )}
+
+          {!fileProgress ? (
+            <UploadButton onClick={createPost} fullWidth>
+              Upload
+            </UploadButton>
+          ) : (
+            <UploadButton disabled={true} onClick={createPost} fullWidth>
+              Upload
+            </UploadButton>
+          )}
         </Box>
       </Modal>
     </div>

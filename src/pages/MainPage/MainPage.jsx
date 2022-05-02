@@ -3,19 +3,15 @@ import { userAuthContext } from "../../components/context/userAuthContext";
 import { styled } from "@mui/material/styles";
 import { Button } from "@mui/material";
 import { lightBlue } from "@mui/material/colors";
-// import Avatar from "@mui/material/Avatar";
-// import VerifiedIcon from "@mui/icons-material/Verified";
 import Container from "@mui/material/Container";
 import Header from "../../components/Header/Header";
 import ModalButton from "../../components/Modal/Modal";
 import BttBtn from "../../components/BttBtn/BttBtn";
-// import CommentBtn from "../../components/CommentBtn/CommentBtn";
-// import LikeBtn from "../../components/LikeBtn/LikeBtn";
-// import CommentBox from "../../components/CommentBox/CommentBox";
-// import DeletePostBtn from "../../components/DeletePostBtn/DeletePostBtn";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../Firebase/FbConfig";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { db, storage } from "../../Firebase/FbConfig";
 import UserPosts from "../UserPosts/UserPosts";
+import { ToastContainer, toast } from "react-toastify";
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(lightBlue[500]),
@@ -38,27 +34,75 @@ const MainPage = () => {
   const { user, logOut } = useContext(userAuthContext);
 
   const [caption, setCaption] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
 
-  // const [toggleComment, setToggleComment] = useState(false);
+  //MANAGING THE ERROR MESSAGE
+  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
-  const postRef = collection(db, "userPost");
+  const [fileProgress, setFileProgress] = useState(0);
 
   const createPost = async () => {
-    await addDoc(postRef, {
-      caption: caption,
-      poster: {
-        name: user.displayName,
-        id: user.uid,
-        email: user.email,
-        verified: user.emailVerified,
-        thumbNail: user.photoURL,
+    if (image === null) {
+      setError(true);
+      setErrMsg("Please select an image");
+      return;
+    }
+
+    const storageRef = ref(storage, `/images/${Date.now()}${image.name}`);
+
+    const uploadedImage = uploadBytesResumable(storageRef, image);
+
+    uploadedImage.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+
+        setFileProgress(progress);
       },
-      timeStamp: new Date()
-    });
+      (err) => {
+        setErrMsg(err);
+      },
+      () => {
+        setCaption("");
+        setImage(null);
+
+        getDownloadURL(uploadedImage.snapshot.ref).then((url) => {
+          const postRef = collection(db, "userPost");
+          addDoc(postRef, {
+            caption: caption,
+            poster: {
+              name: user.displayName,
+              id: user.uid,
+              email: user.email,
+              verified: user.emailVerified,
+              thumbNail: user.photoURL,
+              imageURL: url,
+            },
+            timeStamp: Timestamp.now().toDate(),
+          })
+            .then(() => {
+              toast("Post uploaded successfully", { type: "success" });
+              setFileProgress(0);
+            })
+            .catch(() => {
+              toast("There was a problem uploading the post", {
+                type: "error",
+              });
+            });
+        });
+      }
+    );
+
 
     setCaption("");
+    setImage("");
+
+    setTimeout(() => setError(false), 3000);
   };
+
 
   const logOutHandler = async () => {
     try {
@@ -68,45 +112,13 @@ const MainPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const getPosts = async () => {
-  //     const data = await getDocs(postRef);
-  //     setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   };
-
-  //   getPosts();
-  // }, []);
-
   return (
     <main className="main">
+      <ToastContainer/>
       <Header logOutHandler={logOutHandler} user={user} />
       <Container sx={{ pt: 13 }}>
         <section className="welcome__user">
           <div className="avatar__name">
-            {/* {user?.photoURL ? (
-              <Avatar
-                sx={{
-                  maxWidth: 70,
-                  maxHeight: 70,
-                  width: 60,
-                  height: 60,
-                  mb: 1,
-                }}
-                src={user.photoURL}
-              ></Avatar>
-            ) : (
-              <Avatar
-                sx={{
-                  maxWidth: 70,
-                  maxHeight: 70,
-                  width: 60,
-                  height: 60,
-                  mb: 1,
-                }}
-                src={user.photoURL}
-              ></Avatar>
-            )} */}
-
             {user?.displayName ? (
               <h1>Welcome, {user.displayName.split(" ")[1]}</h1>
             ) : (
@@ -122,9 +134,12 @@ const MainPage = () => {
             image={image}
             setImage={setImage}
             createPost={createPost}
+            error={error}
+            errMsg={errMsg}
+            fileProgress={fileProgress}
           />
         </section>
-        <UserPosts />
+        <UserPosts image={image} />
       </Container>
       <BttBtn />
     </main>

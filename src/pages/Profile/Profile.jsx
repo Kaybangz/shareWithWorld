@@ -16,7 +16,7 @@ const Profile = () => {
   return (
     <main className="main">
       <Header logOutHandler={logOutHandler} user={user} />
-      <Container sx={{ pt: 12 }}>
+      <Container sx={{ pt: 12 }} maxWidth="fluid">
         <section className="user-profile">
           {user?.photoURL ? (
             <Avatar
@@ -59,9 +59,11 @@ const Profile = () => {
           </span>
         </section>
 
-        <section className="user-posts">
+        <section className="posts-heading">
           <h2>Your posts</h2>
         </section>
+
+
       </Container>
     </main>
   );

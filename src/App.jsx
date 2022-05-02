@@ -20,7 +20,7 @@ import ProtectedRoutes from "./pages/ProtectedRoutes/ProtectedRoutes";
 
 const App = () => {
   const [user, setUser] = useState({});
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
 
   // FUNCTION FOR SIGNUP AUTHENTICATION
   const signUp = (email, password) => {

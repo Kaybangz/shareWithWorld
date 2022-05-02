@@ -143,7 +143,7 @@ const SignUpForm = () => {
           />
 
           {/* TEXTFIELD FOR PASSWORD */}
-          {/* <InputTextField
+          <InputTextField
             id="outlined-password-input"
             label="Password"
             type="password"
@@ -151,8 +151,8 @@ const SignUpForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          /> */}
-          <FormControl sx={{ mt: 3 }} fullWidth variant="outlined">
+          />
+          {/* <FormControl sx={{ mt: 3 }} fullWidth variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">
               Password
             </InputLabel>
@@ -176,7 +176,7 @@ const SignUpForm = () => {
                 </InputAdornment>
               }
             />
-          </FormControl>
+          </FormControl> */}
 
           <section>
             <ColorButton

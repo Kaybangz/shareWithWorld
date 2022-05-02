@@ -24,10 +24,6 @@ export const Header = ({ logOutHandler, user }) => {
     setAnchorEl(null);
   };
 
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
-
   return (
     <header>
       <Container>
@@ -50,7 +46,14 @@ export const Header = ({ logOutHandler, user }) => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 40, height: 40 }} src={user.photoURL}></Avatar>
+            {user.photoURL ? (
+              <Avatar
+                sx={{ width: 40, height: 40 }}
+                src={user.photoURL}
+              ></Avatar>
+            ) : (
+              <Avatar sx={{ width: 40, height: 40 }}></Avatar>
+            )}
           </IconButton>
         </Box>
       </Container>
@@ -98,7 +101,13 @@ export const Header = ({ logOutHandler, user }) => {
             to="/mainPage"
             style={{ textDecoration: "none", color: "black" }}
           >
-            <MenuItem style={{ fontFamily: "Manrope", fontWeight: "bold", padding: "1rem" }}>
+            <MenuItem
+              style={{
+                fontFamily: "Manrope",
+                fontWeight: "bold",
+                padding: "1rem",
+              }}
+            >
               <HomeOutlinedIcon
                 sx={{ mr: 1, fontSize: 31, ml: -0.6, color: "gray" }}
               />{" "}
@@ -112,7 +121,13 @@ export const Header = ({ logOutHandler, user }) => {
             to="/profile"
             style={{ textDecoration: "none", color: "black" }}
           >
-            <MenuItem style={{ fontFamily: "Manrope", fontWeight: "bold", padding: "1rem" }}>
+            <MenuItem
+              style={{
+                fontFamily: "Manrope",
+                fontWeight: "bold",
+                padding: "1rem",
+              }}
+            >
               <Avatar src={user.photoURL} /> Profile
             </MenuItem>
           </Link>
@@ -123,7 +138,13 @@ export const Header = ({ logOutHandler, user }) => {
             to="/about-us"
             style={{ textDecoration: "none", color: "black" }}
           >
-            <MenuItem style={{ fontFamily: "Manrope", fontWeight: "bold", padding: "1rem" }}>
+            <MenuItem
+              style={{
+                fontFamily: "Manrope",
+                fontWeight: "bold",
+                padding: "1rem",
+              }}
+            >
               <InfoOutlinedIcon
                 sx={{ mr: 1, fontSize: 31, ml: -0.6, color: "gray" }}
               />
@@ -139,7 +160,7 @@ export const Header = ({ logOutHandler, user }) => {
               fontFamily: "Manrope",
               fontWeight: "bold",
               color: "black",
-              padding: "1rem"
+              padding: "1rem",
             }}
           >
             <ListItemIcon>
