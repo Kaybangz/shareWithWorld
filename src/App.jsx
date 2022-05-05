@@ -17,6 +17,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import Profile from "./pages/Profile/Profile";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import ProtectedRoutes from "./pages/ProtectedRoutes/ProtectedRoutes";
+import CommentBox from "./components/CommentBox/CommentBox";
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -92,6 +93,15 @@ const App = () => {
             element={
               <ProtectedRoutes>
                 <AboutUs />
+              </ProtectedRoutes>
+            }
+          ></Route>
+
+          <Route
+            path="/commentPage/:id"
+            element={
+              <ProtectedRoutes>
+                <CommentBox />
               </ProtectedRoutes>
             }
           ></Route>

@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Logout from "@mui/icons-material/Logout";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Container } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Logo from "./Logo/Logo";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Header = ({ logOutHandler, user }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -57,8 +56,6 @@ export const Header = ({ logOutHandler, user }) => {
           </IconButton>
         </Box>
       </Container>
-
-      {/* <p>{user?.displayName && user.displayName.split(" ")[1]}</p> */}
 
       <div>
         <Menu

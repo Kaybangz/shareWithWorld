@@ -14,9 +14,9 @@ body {
 header {
     width: 100%;
     position: fixed;
-    background-color: #ccf1f1;
+    background-color: #6cd3d3;
     padding: .5rem 0;
-    box-shadow: 0 0 9px #6cd3d3;
+    box-shadow: 0 0 9px #44c5c5;
     top: 0;
     z-index: 999;
 }
@@ -106,11 +106,11 @@ main h2 {
     font-size: clamp(.9rem, 1.5vw, 1rem);
 }
 
-.alert {
+/* .alert {
     font-size: clamp(.9rem, 2.5vw, 1.1rem);
     margin-bottom: 1rem;
     animation: easeIn 1s ease-in-out;
-}
+} */
 
 .no-post-text {
     margin-top: 2rem;
@@ -123,8 +123,8 @@ main h2 {
 .user__info {
     margin-top: 3rem;
     margin-bottom: 1rem;
-    padding: .7rem;
-    border: 1px solid #6cd3d3;
+    padding: .5rem;
+    border: 1px solid #44c5c5;
     border-radius: 10px;
 }
 
@@ -163,12 +163,18 @@ main h2 {
 }
 
 .bottom-side img {
-    border-radius: 5px;
+    border-radius: 8px;
     margin: .3rem 0;
+    height: 500px;
+    object-fit: cover;
 }
 
 .time-stamp {
     margin-bottom: .6rem;
+}
+
+.time-stamp p{
+    font-size: clamp(.7rem, 2.5vw, .9rem);
 }
 
 .like-comment-icons {
@@ -247,17 +253,61 @@ main h2 {
     color: white;
 }
 
-@keyframes easeIn {
-    0% {
-        opacity: 0;
-    }
+.like-btn{
+    animation: likeAnimation 1s ease-in-out;
+    
+}
 
-    50% {
-        opacity: 1;
-    }
+.commentPage-bottom-side img{
+    border-radius: 3px;
+    margin: .3rem 0;
+    height: 100%;
+    object-fit: cover;
+}
 
-    100% {
-        opacity: 1;
+.comment-container{
+    background-color: rgb(241, 231, 231);
+    padding: .5rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.comment-top-side{
+    display: flex;
+    align-items: flex-start;
+}
+
+.comment-top-side-text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.comment-top-side h1{
+    width: 100%;
+    font-size: clamp(.9rem, 2.5vw, 1.2rem);
+    margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+}
+
+.comment-top-side h2{
+    width: 100%;
+    font-size: clamp(.7rem, 2.5vw, 1rem);
+    margin-bottom: .8rem;
+}
+
+@keyframes likeAnimation {
+    0%  { transform: scale(1);  }
+    30% {  transform: scale(.8); }
+    50%{ transform: scale(1.1); }
+    100%{ transform: scale(1); }
+}
+
+@media screen and (max-width: 500px) {
+    .bottom-side img {
+        height: 400px;
     }
 }
 
@@ -278,5 +328,9 @@ main h2 {
 
     .top-side-text span {
         display: block;
+    }
+
+    .bottom-side img {
+        height: 350px;
     }
 }

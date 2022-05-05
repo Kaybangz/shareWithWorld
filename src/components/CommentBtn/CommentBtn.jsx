@@ -1,21 +1,18 @@
 import React from "react";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 
-const CommentBtn = ({ toggleComment, setToggleComment }) => {
+const CommentBtn = ({comments}) => {
   return (
     <>
-      <span
-        className="comment-icon"
-        onClick={() => setToggleComment(!toggleComment)}
-      >
+      <span className="comment-icon">
         <ModeCommentOutlinedIcon
           sx={{
             fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
             cursor: "pointer",
-            color: "rgb(83, 81, 81)",
+            color: "#6cd3d3",
           }}
         />
-        <p>0</p>
+        <p>{comments.length}</p>
       </span>
     </>
   );

@@ -31,7 +31,7 @@ const modalBtnStyle = {
 };
 
 const iconStyle = {
-  fontSize: "clamp(1.3rem, 2.5vw, 1.3rem)",
+  fontSize: "clamp(1rem, 2.5vw, 1.3rem)",
 };
 
 const InputTextField = styled(TextField)({

@@ -20,6 +20,7 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
 import { deleteObject, ref } from "firebase/storage";
+import { Link } from "react-router-dom";
 
 const iconStyle = {
   color: "#1D9BF0",
@@ -31,7 +32,7 @@ const spinnerStyle = css`
   border-color: #159191;
 `;
 
-const UserPosts = () => {
+const UserPosts = ({logOutHandler}) => {
   const { user } = useContext(userAuthContext);
 
   const [postList, setPostList] = useState([]);
@@ -39,16 +40,15 @@ const UserPosts = () => {
   const [toggleComment, setToggleComment] = useState(false);
 
   const deletePost = async (id, imageURL) => {
-      try{
-        const postDoc = doc(db, "userPost", id);
-        await deleteDoc(postDoc)
-        toast("Post deleted successfully", { type: "success" });
-        const storageRef = ref(storage, imageURL);
-        await deleteObject(storageRef);
-      }
-      catch(err){
-        toast("Something went wrong, couldn't delete post", { type: "error" });
-      }
+    try {
+      const postDoc = doc(db, "userPost", id);
+      toast("Post deleted successfully", { type: "success" });
+      await deleteDoc(postDoc);
+      const storageRef = ref(storage, imageURL);
+      await deleteObject(storageRef);
+    } catch (err) {
+      toast("Something went wrong, couldn't delete post", { type: "error" });
+    }
   };
 
   useEffect(() => {
@@ -64,7 +64,6 @@ const UserPosts = () => {
 
       setPostList(posts);
     });
-
   }, [postList]);
 
   return (
@@ -72,7 +71,7 @@ const UserPosts = () => {
       {postList.length === 0 ? (
         <div className="no-post-text">
           <h4>Loading posts</h4>
-          <ClipLoader css={spinnerStyle} size={20} />
+          <ClipLoader css={spinnerStyle} size={17} />
         </div>
       ) : (
         postList.map((post) => {
@@ -124,7 +123,11 @@ const UserPosts = () => {
                   </div>
 
                   {post.poster.id === user.uid && (
-                    <DeletePostBtn deletePost={() => deletePost(post.id, post.poster.imageURL)} />
+                    <DeletePostBtn
+                      deletePost={() =>
+                        deletePost(post.id, post.poster.imageURL)
+                      }
+                    />
                   )}
                 </div>
 
@@ -132,29 +135,20 @@ const UserPosts = () => {
                   <span className="caption">
                     <h1>{post.caption}</h1>
                   </span>
-                  <img
-                    src={post.poster.imageURL}
-                    alt=""
-                    width="100%"
-                    height="50%"
-                  />
+                  <img src={post.poster.imageURL} alt="" width="100%" />
 
                   <section className="time-stamp">
-                    <p>Posted on {post.timeStamp.toDate().toDateString()}</p>
-
-                    {/* <p>{post.timeStamp.toDate().toLocaleTimeString()}</p> */}
+                    <p>
+                      Posted on {post.timeStamp.toDate().toDateString()} at{" "}
+                      {post.timeStamp.toDate().toLocaleTimeString()}
+                    </p>
                   </section>
 
                   <section className="like-comment-icons">
-                    <LikeBtn />
-                    <CommentBtn
-                      toggleComment={toggleComment}
-                      setToggleComment={setToggleComment}
-                    />
-                  </section>
-
-                  <section className="comment-section">
-                    {toggleComment && <CommentBox />}
+                    <LikeBtn likes={post.likes} id={post.id} />
+                    <Link style={{textDecoration: "none"}} to={`/commentPage/${post.id}`}>
+                      <CommentBtn comments={post.comments} />
+                    </Link>
                   </section>
                 </div>
               </section>
