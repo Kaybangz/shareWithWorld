@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import { userAuthContext } from "../../components/context/userAuthContext";
 import VerifiedIcon from "@mui/icons-material/Verified";
+import { collection, orderBy, query, onSnapshot } from "firebase/firestore";
+import { db } from "../../Firebase/FbConfig";
+import { LocalPostOfficeRounded } from "@mui/icons-material";
 
 const iconStyle = {
   color: "#1D9BF0",
@@ -11,12 +14,29 @@ const iconStyle = {
 };
 
 const Profile = () => {
-  const { user, logOutHandler } = useContext(userAuthContext);
+  const { user } = useContext(userAuthContext);
+
+  const [userPosts, setUserPosts] = useState([]);
+
+  useEffect(() => {
+    const postRef = collection(db, "userPost");
+
+    const q = query(postRef, orderBy("timeStamp", "desc"));
+
+    onSnapshot(q, (snapshot) => {
+      const posts = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setUserPosts(posts);
+    });
+  }, []);
 
   return (
     <main className="main">
-      <Header logOutHandler={logOutHandler} user={user} />
-      <Container sx={{ pt: 12 }} maxWidth="fluid">
+      <Header user={user} />
+      <Container sx={{ pt: 12 }}>
         <section className="user-profile">
           {user?.photoURL ? (
             <Avatar
@@ -60,10 +80,26 @@ const Profile = () => {
         </section>
 
         <section className="posts-heading">
-          <h2>Your posts</h2>
+          <h2>My posts</h2>
         </section>
 
-
+        <div className="post-container">
+          {userPosts
+            .filter((post) => post.poster.id === user.uid)
+            .map((userPost) => {
+              return (
+                <section className="post-wrapper" key={userPost.id}>
+                  <h1>{userPost.caption}</h1>
+                  <img
+                    src={userPost.poster.imageURL}
+                    alt={userPost.poster.name}
+                    width="100%"
+                    loading="lazy"
+                  />
+                </section>
+              );
+            })}
+        </div>
       </Container>
     </main>
   );

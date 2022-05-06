@@ -106,12 +106,6 @@ main h2 {
     font-size: clamp(.9rem, 1.5vw, 1rem);
 }
 
-/* .alert {
-    font-size: clamp(.9rem, 2.5vw, 1.1rem);
-    margin-bottom: 1rem;
-    animation: easeIn 1s ease-in-out;
-} */
-
 .no-post-text {
     margin-top: 2rem;
     text-align: center;
@@ -151,21 +145,25 @@ main h2 {
 }
 
 .top-side-text span h3 {
-    font-size: clamp(.9rem, 2.5vw, 1.1rem);
+    font-size: clamp(.8rem, 2.5vw, 1.1rem);
     display: flex;
     align-items: center;
 }
 
 .top-side-text span h4 {
-    font-size: clamp(.8rem, 2.5vw, 1rem);
+    font-size: clamp(.7rem, 2.5vw, 1rem);
     margin-left: .2rem;
     color: rgb(163, 157, 157);
+}
+
+.bottom-side h1{
+    font-size: clamp(.9rem, 2.5vw, 1.2rem);
 }
 
 .bottom-side img {
     border-radius: 8px;
     margin: .3rem 0;
-    height: 500px;
+    height: 550px;
     object-fit: cover;
 }
 
@@ -173,7 +171,7 @@ main h2 {
     margin-bottom: .6rem;
 }
 
-.time-stamp p{
+.time-stamp p {
     font-size: clamp(.7rem, 2.5vw, .9rem);
 }
 
@@ -223,16 +221,39 @@ main h2 {
 
 .posts-heading {
     margin-top: 2rem;
+    margin-bottom: 2rem;
     padding: 1rem 0 0 0;
-    border-top: 1px solid #80f7f7;
-    ;
-    border-bottom: 1px solid #80f7f7;
-    ;
+    border-top: 3px solid #80f7f7;
+    border-bottom: 3px solid #80f7f7;
 }
 
 .posts-heading h2 {
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     font-weight: 700;
+    
+}
+
+.post-container {
+    margin-bottom: 1rem;
+}
+
+.post-wrapper {
+    padding: .5rem .5rem 1.5rem .5rem;
+    /* border: 1px solid #44c5c5; */
+    /* border-radius: 10px; */
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #44c5c5;
+}
+
+.post-wrapper h1{
+    margin-bottom: 10px;
+    font-size: clamp(.8rem, 2.5vw, 1rem);
+}
+
+.post-wrapper img{
+    height: 550px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 /* STYLING FOR PROGRESS BAR */
@@ -249,42 +270,42 @@ main h2 {
 }
 
 .label {
-    font-size: clamp(.8rem, 2.5vw, 1rem);   
+    font-size: clamp(.8rem, 2.5vw, 1rem);
     color: white;
 }
 
-.like-btn{
+.like-btn {
     animation: likeAnimation 1s ease-in-out;
-    
+
 }
 
-.commentPage-bottom-side img{
+.commentPage-bottom-side img {
     border-radius: 3px;
     margin: .3rem 0;
     height: 100%;
     object-fit: cover;
 }
 
-.comment-container{
-    background-color: rgb(241, 231, 231);
+.comment-container {
+    background-color: rgb(248, 241, 241);
     padding: .5rem;
     border-radius: 5px;
     margin-bottom: 1rem;
 }
 
-.comment-top-side{
+.comment-top-side {
     display: flex;
     align-items: flex-start;
 }
 
-.comment-top-side-text{
+.comment-top-side-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-.comment-top-side h1{
+.comment-top-side h1 {
     width: 100%;
     font-size: clamp(.9rem, 2.5vw, 1.2rem);
     margin-bottom: .5rem;
@@ -292,21 +313,36 @@ main h2 {
     align-items: center;
 }
 
-.comment-top-side h2{
+.comment-top-side h2 {
     width: 100%;
     font-size: clamp(.7rem, 2.5vw, 1rem);
     margin-bottom: .8rem;
 }
 
 @keyframes likeAnimation {
-    0%  { transform: scale(1);  }
-    30% {  transform: scale(.8); }
-    50%{ transform: scale(1.1); }
-    100%{ transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(.8);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @media screen and (max-width: 500px) {
     .bottom-side img {
+        height: 400px;
+    }
+
+    .post-wrapper img{
         height: 400px;
     }
 }
@@ -331,6 +367,10 @@ main h2 {
     }
 
     .bottom-side img {
+        height: 350px;
+    }
+
+    .post-wrapper img{
         height: 350px;
     }
 }

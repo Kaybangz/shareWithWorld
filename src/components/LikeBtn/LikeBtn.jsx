@@ -8,7 +8,6 @@ import { db } from "../../Firebase/FbConfig";
 const LikeBtn = ({ likes, id }) => {
   const { user } = useContext(userAuthContext);
 
-
   const likesRef = doc(db, "userPost", id);
 
   const handleLikePost = async () => {
@@ -27,7 +26,7 @@ const LikeBtn = ({ likes, id }) => {
         likes: arrayUnion(user.uid),
       })
         .then(() => {
-          console.log("liked")
+          console.log("liked");
         })
         .catch((err) => {
           console.log(err);

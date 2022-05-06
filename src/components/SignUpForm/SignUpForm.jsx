@@ -2,13 +2,6 @@ import React, { useState, useContext } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import { Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
@@ -57,29 +50,6 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const SignUpForm = () => {
-  const [values, setValues] = useState({
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
-  });
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
   //FOR REDIRECTING THE USER TO LOGIN PAGE IF PAGE IF EMAIL AND PASSWORD IS SUCCESSFULLY CREATED
   const navigate = useNavigate();
 
@@ -87,8 +57,6 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   //MANAGING THE STATE OF THE PASSWORD
   const [password, setPassword] = useState("");
-  //MANAGING THE STATE OF THE PASSWORD CONFIRMATION
-  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   //MANAGING THE ERROR MESSAGE
   const [error, setError] = useState(false);
@@ -97,9 +65,11 @@ const SignUpForm = () => {
   //GETTING THE VALUES FROM THE USERAUTHCONTEXT
   const { signUp } = useContext(userAuthContext);
 
+  //FUNCTION FOR HANDLING SIGN UP
   const submitHandler = async () => {
     try {
       await signUp(email, password);
+      // IF EMAIL AND PASSWORD IS VALID, REDIRECT USER TO LOGIN PAGE
       navigate("/");
     } catch (err) {
       setError(true);
@@ -152,31 +122,6 @@ const SignUpForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {/* <FormControl sx={{ mt: 3 }} fullWidth variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              style={{ borderColor: "#039BE5" }}
-              id="outlined-adornment-password"
-              label="Password"
-              type={values.showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={handleChange("password")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl> */}
 
           <section>
             <ColorButton

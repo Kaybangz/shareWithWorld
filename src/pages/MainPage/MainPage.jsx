@@ -1,8 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { userAuthContext } from "../../components/context/userAuthContext";
-// import { styled } from "@mui/material/styles";
-// import { Button } from "@mui/material";
-// import { lightBlue } from "@mui/material/colors";
 import Container from "@mui/material/Container";
 import Header from "../../components/Header/Header";
 import ModalButton from "../../components/Modal/Modal";
@@ -13,26 +10,10 @@ import { db, storage } from "../../Firebase/FbConfig";
 import UserPosts from "../UserPosts/UserPosts";
 import { ToastContainer, toast } from "react-toastify";
 
-// const ColorButton = styled(Button)(({ theme }) => ({
-//   color: theme.palette.getContrastText(lightBlue[500]),
-//   color: "white",
-//   fontSize: "clamp(.7rem, 1.5vw, 1rem)",
-//   fontWeight: "600",
-//   fontFamily: "Manrope",
-//   backgroundColor: lightBlue[500],
-//   "&:hover": {
-//     backgroundColor: lightBlue[700],
-//   },
-// }));
-
-// const iconStyle = {
-//   color: "#1D9BF0",
-//   fontSize: "clamp(1.2rem, 2.5vw, 1.3rem)",
-// };
-
 const MainPage = () => {
-  const { user, logOut } = useContext(userAuthContext);
+  const { user } = useContext(userAuthContext);
 
+  // STATES FOR CONTROLLING THE CAPTION AND IMAGE FILE INPUT
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
 
@@ -40,15 +21,18 @@ const MainPage = () => {
   const [error, setError] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
+  //STATE FOR FILE PROGRESS
   const [fileProgress, setFileProgress] = useState(0);
 
   const createPost = async () => {
+    //CHECK IF FILE INPUT FOR IMAGE IS EMPTY
     if (image === null) {
       setError(true);
       setErrMsg("Please select an image");
       return;
     }
 
+    //REF FOR STORING IMAGE IN FIREBASE STORAGE
     const storageRef = ref(storage, `/images/${Date.now()}${image.name}`);
 
     const uploadedImage = uploadBytesResumable(storageRef, image);
@@ -70,6 +54,7 @@ const MainPage = () => {
         setImage(null);
 
         getDownloadURL(uploadedImage.snapshot.ref).then((url) => {
+          // STORING USER INFORMATION AND POST IN FIREBASE FIRESTORE
           const postRef = collection(db, "userPost");
           addDoc(postRef, {
             caption: caption,
@@ -104,18 +89,10 @@ const MainPage = () => {
     setTimeout(() => setError(false), 3000);
   };
 
-  const logOutHandler = async () => {
-    try {
-      await logOut();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <main className="main">
       <ToastContainer />
-      <Header logOutHandler={logOutHandler} user={user} />
+      <Header user={user} />
       <Container sx={{ pt: 13 }}>
         <section className="welcome__user">
           <div className="avatar__name">
@@ -139,7 +116,7 @@ const MainPage = () => {
             fileProgress={fileProgress}
           />
         </section>
-        <UserPosts logOutHandler={logOutHandler} image={image} />
+        <UserPosts image={image} />
       </Container>
       <BttBtn />
     </main>

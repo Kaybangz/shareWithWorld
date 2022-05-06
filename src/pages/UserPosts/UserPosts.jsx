@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
-  getDocs,
   collection,
   deleteDoc,
   doc,
@@ -12,7 +11,6 @@ import { db, storage } from "../../Firebase/FbConfig";
 import { userAuthContext } from "../../components/context/userAuthContext";
 import CommentBtn from "../../components/CommentBtn/CommentBtn";
 import LikeBtn from "../../components/LikeBtn/LikeBtn";
-import CommentBox from "../../components/CommentBox/CommentBox";
 import DeletePostBtn from "../../components/DeletePost/DeletePostBtn";
 import { css } from "@emotion/react";
 import Avatar from "@mui/material/Avatar";
@@ -32,12 +30,10 @@ const spinnerStyle = css`
   border-color: #159191;
 `;
 
-const UserPosts = ({logOutHandler}) => {
+const UserPosts = ({ logOutHandler }) => {
   const { user } = useContext(userAuthContext);
 
   const [postList, setPostList] = useState([]);
-
-  const [toggleComment, setToggleComment] = useState(false);
 
   const deletePost = async (id, imageURL) => {
     try {
@@ -64,7 +60,7 @@ const UserPosts = ({logOutHandler}) => {
 
       setPostList(posts);
     });
-  }, [postList]);
+  }, []);
 
   return (
     <>
@@ -122,6 +118,7 @@ const UserPosts = ({logOutHandler}) => {
                     </div>
                   </div>
 
+                  {/* ONLY SHOW THE DELETE BUTTON FOR THE OP */}
                   {post.poster.id === user.uid && (
                     <DeletePostBtn
                       deletePost={() =>
@@ -131,12 +128,19 @@ const UserPosts = ({logOutHandler}) => {
                   )}
                 </div>
 
+                {/* POST CAPTION AND IMAGE */}
                 <div className="bottom-side">
                   <span className="caption">
                     <h1>{post.caption}</h1>
                   </span>
-                  <img src={post.poster.imageURL} alt="" width="100%" />
+                  <img
+                    src={post.poster.imageURL}
+                    alt=""
+                    loading="lazy"
+                    width="100%"
+                  />
 
+                  {/* TIME STAMP, LIKES AND COMMENTS BUTTON */}
                   <section className="time-stamp">
                     <p>
                       Posted on {post.timeStamp.toDate().toDateString()} at{" "}
@@ -146,7 +150,10 @@ const UserPosts = ({logOutHandler}) => {
 
                   <section className="like-comment-icons">
                     <LikeBtn likes={post.likes} id={post.id} />
-                    <Link style={{textDecoration: "none"}} to={`/commentPage/${post.id}`}>
+                    <Link
+                      style={{ textDecoration: "none" }}
+                      to={`/commentPage/${post.id}`}
+                    >
                       <CommentBtn comments={post.comments} />
                     </Link>
                   </section>

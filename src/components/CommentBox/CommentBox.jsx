@@ -12,7 +12,6 @@ import {
   arrayUnion,
   doc,
   onSnapshot,
-  onSnapshotsInSync,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../Firebase/FbConfig";
@@ -40,8 +39,8 @@ const iconStyle = {
 };
 
 const deleteIconStyle = {
-  color: "grey",
-  fontSize: "clamp(1.3rem, 2.5vw, 1.3rem)",
+  color: "#1D9BF0",
+  fontSize: "clamp(1.2rem, 2.5vw, 1.3rem)",
   cursor: "pointer",
 };
 
@@ -96,7 +95,7 @@ const CommentBox = () => {
   // FUNCTION FOR DELETING COMMENT
   const deleteComment = (comment) => {
     updateDoc(commentRef, {
-      comments: arrayRemove(comment)
+      comments: arrayRemove(comment),
     })
       .then(() => {
         toast("Comment deleted", { type: "success" });

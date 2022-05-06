@@ -64,7 +64,7 @@ const App = () => {
 
   return (
     <userAuthContext.Provider
-      value={{ user, signUp, logIn, logOut, googleSignIn }}
+      value={{ user, signUp, logIn, logOut, googleSignIn, isAuth }}
     >
       <Fragment>
         <Routes>

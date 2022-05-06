@@ -1,7 +1,7 @@
 import React from "react";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 
-const CommentBtn = ({comments}) => {
+const CommentBtn = ({ comments }) => {
   return (
     <>
       <span className="comment-icon">

@@ -67,6 +67,7 @@ const LogInForm = () => {
   //GETTING THE VALUES FROM THE USERAUTHCONTEXT
   const { logIn, googleSignIn } = useContext(userAuthContext);
 
+  //FUNCTION FOR HANDLING LOG IN
   const submitHandler = async () => {
     setErrMsg("");
     try {
@@ -80,6 +81,7 @@ const LogInForm = () => {
     setTimeout(() => setError(false), 3000);
   };
 
+  //FUNCTION FOR HANDLING GOOGLE AUTHENTICATION
   const handleGoogleAuth = async () => {
     try {
       await googleSignIn();
@@ -160,10 +162,6 @@ const LogInForm = () => {
             <h3>
               Don't have an account? <Link to="/signupform">Sign Up</Link>
             </h3>
-
-            <h4>
-              Forgot password?
-            </h4>
           </section>
         </Box>
       </Container>
