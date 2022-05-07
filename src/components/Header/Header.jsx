@@ -106,10 +106,11 @@ export const Header = () => {
                 fontFamily: "Manrope",
                 fontWeight: "bold",
                 padding: "1rem",
+                fontSize: "clamp(.9rem, 2.5vw, 1rem)"
               }}
             >
               <HomeOutlinedIcon
-                sx={{ mr: 1, fontSize: 31, ml: -0.6, color: "gray" }}
+                sx={{ mr: 1, fontSize: 30, ml: -0.6, color: "gray" }}
               />{" "}
               Home
             </MenuItem>
@@ -126,9 +127,10 @@ export const Header = () => {
                 fontFamily: "Manrope",
                 fontWeight: "bold",
                 padding: "1rem",
+                fontSize: "clamp(.9rem, 2.5vw, 1rem)"
               }}
             >
-              <Avatar src={user.photoURL} /> Profile
+              <Avatar src={user.photoURL} sx={{height: 20, width: 20}} /> Profile
             </MenuItem>
           </Link>
 
@@ -143,10 +145,11 @@ export const Header = () => {
                 fontFamily: "Manrope",
                 fontWeight: "bold",
                 padding: "1rem",
+                fontSize: "clamp(.9rem, 2.5vw, 1rem)"
               }}
             >
               <InfoOutlinedIcon
-                sx={{ mr: 1, fontSize: 31, ml: -0.6, color: "gray" }}
+                sx={{ mr: 1, fontSize: 30, ml: -0.6, color: "gray" }}
               />
               About Us
             </MenuItem>
@@ -161,6 +164,7 @@ export const Header = () => {
               fontWeight: "bold",
               color: "black",
               padding: "1rem",
+              fontSize: "clamp(.9rem, 2.5vw, 1rem)"
             }}
           >
             <ListItemIcon>

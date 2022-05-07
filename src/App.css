@@ -216,12 +216,14 @@ main h2 {
 }
 
 .user-profile h3 {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
     display: flex;
     align-items: center;
     margin: .5rem 0;
 }
 
 .user-profile h4 {
+    font-size: clamp(.8rem, 2.5vw, .9rem);
     margin: 0 0 .5rem 0;
     border-top: 1px solid #80f7f7;
     padding: .5rem;
@@ -236,7 +238,7 @@ main h2 {
 }
 
 .posts-heading h2 {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: clamp(.9rem, 2.5vw, 1.1rem);
     font-weight: 700;
 
 }

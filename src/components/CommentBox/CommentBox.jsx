@@ -269,13 +269,15 @@ const CommentBox = () => {
                           </span>
                         </div>
                         <h2>{comment}</h2>
-                        <p>Replying to {post.poster.name ? (
-
-                          post.poster.name
-                        
-                      ) : (
-                        post.poster.email
-                      )}'s post</p>
+                        {post.poster.id !== user.uid && (
+                          <p>
+                            Replying to{" "}
+                            {post.poster.name
+                              ? post.poster.name
+                              : post.poster.email}
+                            's post
+                          </p>
+                        )}
                       </section>
                     );
                   }

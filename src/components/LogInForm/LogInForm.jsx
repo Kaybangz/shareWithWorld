@@ -65,16 +65,14 @@ const LogInForm = () => {
   const [errMsg, setErrMsg] = useState("");
 
   //GETTING THE VALUES FROM THE USERAUTHCONTEXT
-  const { logIn, googleSignIn, isAuth } = useContext(userAuthContext);
+  const { logIn, googleSignIn } = useContext(userAuthContext);
 
   //FUNCTION FOR HANDLING LOG IN
   const submitHandler = async () => {
     setErrMsg("");
     try {
-      if (isAuth) {
         await logIn(email, password);
         navigate("/mainPage");
-      }
     } catch (err) {
       setError(true);
       setErrMsg(err.message);
@@ -86,10 +84,8 @@ const LogInForm = () => {
   //FUNCTION FOR HANDLING GOOGLE AUTHENTICATION
   const handleGoogleAuth = async () => {
     try {
-      if (isAuth) {
         await googleSignIn();
         navigate("/mainPage");
-      }
     } catch (err) {
       setError(true);
       setErrMsg(err.message);
