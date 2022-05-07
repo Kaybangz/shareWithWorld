@@ -32,7 +32,6 @@ const DeletePostBtn = ({ deletePost }) => {
         MenuListProps={{
           "aria-labelledby": "long-button",
         }}
-        onClick={deletePost}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -44,6 +43,7 @@ const DeletePostBtn = ({ deletePost }) => {
         }}
       >
         <p
+          onClick={deletePost}
           style={{ textAlign: "center", cursor: "pointer" }}
         >
           Delete Post

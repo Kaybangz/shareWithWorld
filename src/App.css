@@ -122,6 +122,10 @@ main h2 {
     justify-content: center;
 }
 
+.no-post-text h4{
+    font-size: clamp(.8rem, 2.3vw, 1rem);
+}
+
 .user__info {
     margin-top: 3rem;
     margin-bottom: 1rem;

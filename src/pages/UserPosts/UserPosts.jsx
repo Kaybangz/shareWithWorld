@@ -22,11 +22,12 @@ import { Link } from "react-router-dom";
 
 const iconStyle = {
   color: "#1D9BF0",
-  fontSize: "clamp(1.2rem, 2.5vw, 1.3rem)",
+  fontSize: "clamp(.9rem, 2.5vw, 1.1rem)",
 };
 
 const spinnerStyle = css`
-  margin-left: 0.2rem;
+  margin-top: 0.1rem;
+  margin-left: 0.1rem;
   border-color: #159191;
 `;
 
@@ -67,7 +68,7 @@ const UserPosts = ({ logOutHandler }) => {
       {postList.length === 0 ? (
         <div className="no-post-text">
           <h4>Loading posts</h4>
-          <ClipLoader css={spinnerStyle} size={17} />
+          <ClipLoader css={spinnerStyle} size={14} />
         </div>
       ) : (
         postList.map((post) => {

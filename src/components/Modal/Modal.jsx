@@ -103,7 +103,6 @@ const ModalButton = ({
         <CameraAltOutlinedIcon style={iconStyle} />{" "}
       </Button>
       <Modal
-        keepMounted
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
