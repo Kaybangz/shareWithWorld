@@ -35,11 +35,11 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 const iconStyle = {
   color: "#1D9BF0",
-  fontSize: "clamp(1.2rem, 2.5vw, 1.3rem)",
+  fontSize: "clamp(.9rem, 2.5vw, 1.3rem)",
 };
 
 const deleteIconStyle = {
-  color: "#1D9BF0",
+  color: "#2476ad",
   fontSize: "clamp(1.2rem, 2.5vw, 1.3rem)",
   cursor: "pointer",
 };
@@ -69,7 +69,7 @@ const CommentBox = () => {
     const dRef = doc(db, "userPost", id);
     onSnapshot(dRef, (snapshot) => {
       setPost({ ...snapshot.data(), id: snapshot.id });
-      setComments(snapshot.data().comments);
+      setComments(snapshot.data().comments.reverse());
     });
   }, []);
 
@@ -120,8 +120,8 @@ const CommentBox = () => {
                         sx={{
                           maxWidth: 70,
                           maxHeight: 70,
-                          width: 55,
-                          height: 55,
+                          width: 40,
+                          height: 40,
                           mb: 1,
                         }}
                         src={post.poster.thumbNail}
@@ -131,8 +131,8 @@ const CommentBox = () => {
                         sx={{
                           maxWidth: 70,
                           maxHeight: 70,
-                          width: 55,
-                          height: 55,
+                          width: 40,
+                          height: 40,
                           mb: 1,
                         }}
                       ></Avatar>
@@ -151,7 +151,7 @@ const CommentBox = () => {
                         <h3>User</h3>
                       )}
 
-                      <h4>@{post.poster.email}</h4>
+                      <h4>{post.poster.email}</h4>
                     </span>
                   </div>
                 </div>
@@ -182,7 +182,7 @@ const CommentBox = () => {
                   inputProps={ariaLabel}
                   sx={{
                     mr: 1,
-                    width: "72%",
+                    width: "74%",
                     fontFamily: "Manrope",
                     mt: 3,
                     mb: 5,
@@ -208,64 +208,74 @@ const CommentBox = () => {
                     return (
                       <section key={commentID} className="comment-container">
                         <div className="comment-top-side">
-                          <span>
-                            {userImage ? (
-                              <Avatar
-                                sx={{
-                                  maxWidth: 70,
-                                  maxHeight: 70,
-                                  width: 35,
-                                  height: 35,
-                                  mb: 1,
-                                  mr: 1,
-                                }}
-                                src={userImage}
-                              ></Avatar>
-                            ) : (
-                              <Avatar
-                                sx={{
-                                  maxWidth: 70,
-                                  maxHeight: 70,
-                                  width: 35,
-                                  height: 35,
-                                  mb: 1,
-                                  mr: 1,
-                                }}
-                              ></Avatar>
-                            )}
-                          </span>
-                          <div className="comment-top-side-text">
-                            {userName ? (
-                              <h1>
-                                {userName}
-                                {userVerified && (
-                                  <VerifiedIcon style={iconStyle} />
-                                )}
-                              </h1>
-                            ) : (
-                              <h1>User</h1>
-                            )}
-                            <h2>{comment}</h2>
+                          <article>
                             <span>
-                              {userId === user.uid && (
-                                <DeleteOutlineSharpIcon
-                                  onClick={() =>
-                                    deleteComment({
-                                      commentID,
-                                      userId,
-                                      comment,
-                                      userName,
-                                      userImage,
-                                      userVerified,
-                                      userEmail,
-                                    })
-                                  }
-                                  style={deleteIconStyle}
-                                />
+                              {userImage ? (
+                                <Avatar
+                                  sx={{
+                                    maxWidth: 70,
+                                    maxHeight: 70,
+                                    width: 30,
+                                    height: 30,
+                                    mb: 1,
+                                    mr: 1,
+                                  }}
+                                  src={userImage}
+                                ></Avatar>
+                              ) : (
+                                <Avatar
+                                  sx={{
+                                    maxWidth: 70,
+                                    maxHeight: 70,
+                                    width: 30,
+                                    height: 30,
+                                    mb: 1,
+                                    mr: 1,
+                                  }}
+                                ></Avatar>
                               )}
                             </span>
-                          </div>
+                            <div className="comment-top-side-text">
+                              {userName ? (
+                                <h1>
+                                  {userName}
+                                  {userVerified && (
+                                    <VerifiedIcon style={iconStyle} />
+                                  )}
+                                </h1>
+                              ) : (
+                                <h1>{userEmail}</h1>
+                              )}
+                            </div>
+                          </article>
+
+                          <span>
+                            {userId === user.uid && (
+                              <DeleteOutlineSharpIcon
+                                onClick={() =>
+                                  deleteComment({
+                                    commentID,
+                                    userId,
+                                    comment,
+                                    userName,
+                                    userImage,
+                                    userVerified,
+                                    userEmail,
+                                  })
+                                }
+                                style={deleteIconStyle}
+                              />
+                            )}
+                          </span>
                         </div>
+                        <h2>{comment}</h2>
+                        <p>Replying to {post.poster.name ? (
+
+                          post.poster.name
+                        
+                      ) : (
+                        post.poster.email
+                      )}'s post</p>
                       </section>
                     );
                   }

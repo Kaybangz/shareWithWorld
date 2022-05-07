@@ -40,11 +40,11 @@ p {
 }
 
 main h1 {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
 }
 
 main h2 {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: clamp(.9rem, 2.5vw, 1.2rem);
     margin-bottom: 1.5rem;
 }
 
@@ -88,6 +88,14 @@ main h2 {
     color: #1a1c8d;
     font-size: clamp(1rem, 1.5vw, 1.6rem);
     margin-bottom: 1rem;
+}
+
+.alert {
+    font-size: clamp(.8rem, 2.5vw, 1.1rem);
+    margin-bottom: 1.2rem;
+    padding: 15px;
+    border-radius: 5px;
+    animation: easeIn 1s ease-in-out;
 }
 
 .sign_up_link {
@@ -156,7 +164,7 @@ main h2 {
     color: rgb(163, 157, 157);
 }
 
-.bottom-side h1{
+.bottom-side h1 {
     font-size: clamp(.9rem, 2.5vw, 1.2rem);
 }
 
@@ -223,14 +231,14 @@ main h2 {
     margin-top: 2rem;
     margin-bottom: 2rem;
     padding: 1rem 0 0 0;
-    border-top: 3px solid #80f7f7;
-    border-bottom: 3px solid #80f7f7;
+    border-top: 1px solid #80f7f7;
+    border-bottom: 1px solid #80f7f7;
 }
 
 .posts-heading h2 {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     font-weight: 700;
-    
+
 }
 
 .post-container {
@@ -238,19 +246,16 @@ main h2 {
 }
 
 .post-wrapper {
-    padding: .5rem .5rem 1.5rem .5rem;
-    /* border: 1px solid #44c5c5; */
-    /* border-radius: 10px; */
+    padding: .5rem;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid #44c5c5;
 }
 
-.post-wrapper h1{
+.post-wrapper h1 {
     margin-bottom: 10px;
     font-size: clamp(.8rem, 2.5vw, 1rem);
 }
 
-.post-wrapper img{
+.post-wrapper img {
     height: 550px;
     object-fit: cover;
     border-radius: 5px;
@@ -296,6 +301,12 @@ main h2 {
 .comment-top-side {
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
+}
+
+.comment-top-side article {
+    display: flex;
+    align-items: center;
 }
 
 .comment-top-side-text {
@@ -313,10 +324,26 @@ main h2 {
     align-items: center;
 }
 
-.comment-top-side h2 {
+.comment-container h2 {
     width: 100%;
-    font-size: clamp(.7rem, 2.5vw, 1rem);
+    font-size: clamp(.8rem, 2.5vw, 1rem);
     margin-bottom: .8rem;
+}
+
+.comment-container p {
+    width: 100%;
+    font-size: clamp(.6rem, 2.5vw, 1rem);
+}
+
+@keyframes easeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes likeAnimation {
@@ -342,7 +369,7 @@ main h2 {
         height: 400px;
     }
 
-    .post-wrapper img{
+    .post-wrapper img {
         height: 400px;
     }
 }
@@ -370,7 +397,7 @@ main h2 {
         height: 350px;
     }
 
-    .post-wrapper img{
+    .post-wrapper img {
         height: 350px;
     }
 }

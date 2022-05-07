@@ -26,7 +26,7 @@ const style = {
 const modalBtnStyle = {
   backgroundColor: "#159191",
   color: "white",
-  height: "43px",
+  height: "38px",
   width: "fit-content",
 };
 

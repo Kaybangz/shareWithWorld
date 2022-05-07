@@ -6,7 +6,6 @@ import { userAuthContext } from "../../components/context/userAuthContext";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import { collection, orderBy, query, onSnapshot } from "firebase/firestore";
 import { db } from "../../Firebase/FbConfig";
-import { LocalPostOfficeRounded } from "@mui/icons-material";
 
 const iconStyle = {
   color: "#1D9BF0",

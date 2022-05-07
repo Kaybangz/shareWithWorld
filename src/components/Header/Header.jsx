@@ -72,7 +72,7 @@ export const Header = () => {
             sx: {
               width: 160,
               overflow: "visible",
-              filter: "drop-shadow(0px 2px 8px #6cd3d3)",
+              filter: "drop-shadow(0px 1px 3px #6cd3d3)",
               mt: 1.5,
               "& .MuiAvatar-root": {
                 width: 32,

@@ -65,14 +65,16 @@ const LogInForm = () => {
   const [errMsg, setErrMsg] = useState("");
 
   //GETTING THE VALUES FROM THE USERAUTHCONTEXT
-  const { logIn, googleSignIn } = useContext(userAuthContext);
+  const { logIn, googleSignIn, isAuth } = useContext(userAuthContext);
 
   //FUNCTION FOR HANDLING LOG IN
   const submitHandler = async () => {
     setErrMsg("");
     try {
-      await logIn(email, password);
-      navigate("/mainPage");
+      if (isAuth) {
+        await logIn(email, password);
+        navigate("/mainPage");
+      }
     } catch (err) {
       setError(true);
       setErrMsg(err.message);
@@ -84,8 +86,10 @@ const LogInForm = () => {
   //FUNCTION FOR HANDLING GOOGLE AUTHENTICATION
   const handleGoogleAuth = async () => {
     try {
-      await googleSignIn();
-      navigate("/mainPage");
+      if (isAuth) {
+        await googleSignIn();
+        navigate("/mainPage");
+      }
     } catch (err) {
       setError(true);
       setErrMsg(err.message);
@@ -156,7 +160,6 @@ const LogInForm = () => {
               Sign in with google
             </ColoredButton>
           </section>
-
 
           <section className="sign_up_link">
             <h3>
