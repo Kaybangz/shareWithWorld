@@ -269,7 +269,7 @@ const CommentBox = () => {
                           </span>
                         </div>
                         <h2>{comment}</h2>
-                        {post.poster.id !== user.uid && (
+                      
                           <p>
                             Replying to{" "}
                             {post.poster.name
@@ -277,7 +277,6 @@ const CommentBox = () => {
                               : post.poster.email}
                             's post
                           </p>
-                        )}
                       </section>
                     );
                   }

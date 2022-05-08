@@ -301,7 +301,7 @@ main h2 {
     background-color: rgb(248, 241, 241);
     padding: .5rem;
     border-radius: 5px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.3rem;
 }
 
 .comment-top-side {
@@ -324,7 +324,7 @@ main h2 {
 
 .comment-top-side h1 {
     width: 100%;
-    font-size: clamp(.9rem, 2.5vw, 1.2rem);
+    font-size: clamp(.7rem, 2.5vw, 1.2rem);
     margin-bottom: .5rem;
     display: flex;
     align-items: center;
@@ -332,13 +332,14 @@ main h2 {
 
 .comment-container h2 {
     width: 100%;
-    font-size: clamp(.8rem, 2.5vw, 1rem);
+    font-size: clamp(.9rem, 2.5vw, 1rem);
     margin-bottom: .8rem;
 }
 
 .comment-container p {
     width: 100%;
     font-size: clamp(.6rem, 2.5vw, 1rem);
+    color: rgb(197, 193, 193);
 }
 
 @keyframes easeIn {
