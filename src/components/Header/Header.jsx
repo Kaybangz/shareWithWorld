@@ -28,7 +28,7 @@ export const Header = () => {
 
   return (
     <header>
-      <Container>
+      <Container maxWidth="md">
         <Box
           sx={{
             display: "flex",

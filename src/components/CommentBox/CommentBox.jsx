@@ -22,7 +22,6 @@ import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 
 const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(lightBlue[500]),
   color: "white",
   fontSize: "clamp(.7rem, 1.5vw, 1rem)",
   fontWeight: "600",
@@ -71,7 +70,7 @@ const CommentBox = () => {
       setPost({ ...snapshot.data(), id: snapshot.id });
       setComments(snapshot.data().comments.reverse());
     });
-  }, []);
+  }, [id]);
 
   // FUNCTION FOR POSTING COMMENT
   const postComment = () => {
@@ -109,7 +108,7 @@ const CommentBox = () => {
     <>
       <main className="main">
         <Header user={user} />
-        <Container sx={{ pt: 13 }}>
+        <Container sx={{ pt: 13 }} maxWidth="md">
           {post && (
             <section>
               <div className="top-side">
@@ -161,12 +160,16 @@ const CommentBox = () => {
                 <span className="caption">
                   <h1>{post.caption}</h1>
                 </span>
-                <img
-                  src={post.poster.imageURL}
-                  alt=""
-                  width="100%"
-                  height="100%"
-                />
+
+                
+                  <img
+                    src={post.poster.imageURL}
+                    alt=""
+                    loading="eager"
+                    width="100%"
+                    height="100%"
+                  />
+          
 
                 <section className="time-stamp">
                   <p>
@@ -269,14 +272,14 @@ const CommentBox = () => {
                           </span>
                         </div>
                         <h2>{comment}</h2>
-                      
-                          <p>
-                            Replying to{" "}
-                            {post.poster.name
-                              ? post.poster.name
-                              : post.poster.email}
-                            's post
-                          </p>
+
+                        <p>
+                          Replying to{" "}
+                          {post.poster.name
+                            ? post.poster.name
+                            : post.poster.email}
+                          's post
+                        </p>
                       </section>
                     );
                   }

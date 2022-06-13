@@ -35,7 +35,7 @@ const Profile = () => {
   return (
     <main className="main">
       <Header user={user} />
-      <Container sx={{ pt: 12 }}>
+      <Container sx={{ pt: 12 }} maxWidth="md">
         <section className="user-profile">
           {user?.photoURL ? (
             <Avatar

@@ -9,6 +9,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../Firebase/FbConfig";
 import UserPosts from "../UserPosts/UserPosts";
 import { ToastContainer, toast } from "react-toastify";
+import "../../App.css";
 
 const MainPage = () => {
   const { user } = useContext(userAuthContext);
@@ -93,7 +94,7 @@ const MainPage = () => {
     <main className="main">
       <ToastContainer />
       <Header user={user} />
-      <Container sx={{ pt: 13 }}>
+      <Container sx={{ pt: 13 }}  maxWidth="md">
         <section className="welcome__user">
           <div className="avatar__name">
             {user?.displayName ? (

@@ -40,7 +40,6 @@ const InputTextField = styled(TextField)({
 // BUTTON STYLING
 const ColoredButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(lightBlue[500]),
-  color: "white",
   fontSize: "clamp(.8rem, 1.5vw, 1rem)",
   fontWeight: "600",
   fontFamily: "Manrope",
